@@ -5,7 +5,6 @@
     --premium-blue: #0f4c81;
     --deep-blue: #1e3a8a;
     --accent-red: #c41e3a;
-    --soft-red: #e3342f;
     --light-gray: #f8fafc;
     --dark-bg: #0a0a0a;
     --dark-surface: #1a1a1a;
@@ -13,7 +12,6 @@
     --dark-text: #e0e0e0;
     --shadow-sm: 0 10px 25px -5px rgba(0, 0, 0, 0.05), 0 8px 10px -6px rgba(0, 0, 0, 0.02);
     --shadow-premium: 0 20px 35px -12px rgba(0, 0, 0, 0.1);
-    --transition: all 0.3s ease;
 }
 
 * {
@@ -30,7 +28,7 @@ body {
     scroll-behavior: smooth;
 }
 
-/* Dark Mode Styles */
+/* Dark Mode */
 body.dark-mode {
     background-color: var(--dark-bg);
     color: var(--dark-text);
@@ -40,15 +38,13 @@ body.dark-mode .premium-header,
 body.dark-mode .slide-container,
 body.dark-mode .form-container,
 body.dark-mode .test-card,
-body.dark-mode .login-card {
+body.dark-mode .login-card,
+body.dark-mode .map-card {
     background-color: var(--dark-surface);
     border-color: rgba(255,255,255,0.1);
 }
 
-body.dark-mode .hero-slide-section {
-    background: linear-gradient(120deg, #0f0f0f 0%, #1a1a1a 100%);
-}
-
+body.dark-mode .hero-slide-section,
 body.dark-mode .gallery-section,
 body.dark-mode .tests-pricing-section,
 body.dark-mode .registration-section {
@@ -68,7 +64,8 @@ body.dark-mode .price-tag {
     color: #f87171;
 }
 
-body.dark-mode .form-group label {
+body.dark-mode .form-group label,
+body.dark-mode .map-address {
     color: #cbd5e1;
 }
 
@@ -80,29 +77,9 @@ body.dark-mode select {
     color: #e0e0e0;
 }
 
-body.dark-mode input:focus,
-body.dark-mode textarea:focus,
-body.dark-mode select:focus {
-    border-color: var(--premium-blue);
-    box-shadow: 0 0 0 3px rgba(15,76,129,0.3);
-}
-
 body.dark-mode .premium-footer {
     background: #050505;
     color: #9ca3af;
-}
-
-body.dark-mode .hover-popup-content {
-    background: var(--deep-blue);
-    color: white;
-}
-
-body.dark-mode .info-note {
-    color: #9ca3af;
-}
-
-body.dark-mode .gallery-card {
-    background: var(--dark-card);
 }
 
 /* Header */
@@ -124,7 +101,6 @@ body.dark-mode .gallery-card {
     background-clip: text;
     -webkit-background-clip: text;
     color: transparent;
-    letter-spacing: -0.3px;
 }
 
 .tagline {
@@ -146,7 +122,6 @@ body.dark-mode .tagline {
     text-decoration: none;
     font-weight: 600;
     color: var(--premium-blue);
-    transition: all 0.2s ease;
     border-bottom: 2px solid transparent;
     padding-bottom: 5px;
 }
@@ -168,16 +143,9 @@ body.dark-mode .nav-links a {
     color: white;
     font-weight: 600;
     cursor: pointer;
-    transition: all 0.2s;
-    font-size: 0.9rem;
 }
 
-.dark-mode-btn:hover {
-    background: var(--deep-blue);
-    transform: scale(1.02);
-}
-
-/* Hero Slide Animation */
+/* Hero Slide */
 .hero-slide-section {
     padding: 2rem 5%;
     background: linear-gradient(120deg, #f0f9ff 0%, #ffffff 100%);
@@ -224,26 +192,16 @@ body.dark-mode .nav-links a {
     border-radius: 40px;
     margin-top: 1.5rem;
     cursor: pointer;
-    transition: all 0.2s;
-    box-shadow: 0 2px 8px rgba(12, 74, 110, 0.2);
-}
-
-.cta-button:hover {
-    background: var(--deep-blue);
-    transform: scale(1.02);
 }
 
 .slide-image img {
     max-width: 100%;
     border-radius: 28px;
-    box-shadow: 0 12px 24px -12px rgba(0,0,0,0.2);
-    width: 100%;
-    height: auto;
     max-height: 300px;
     object-fit: cover;
 }
 
-/* Gallery */
+/* Gallery with Equipment Popups */
 .gallery-section {
     padding: 3rem 5%;
     background: var(--pure-white);
@@ -253,7 +211,6 @@ body.dark-mode .nav-links a {
     text-align: center;
     font-size: 2rem;
     margin-bottom: 2rem;
-    font-weight: 600;
 }
 
 .blue-accent { color: var(--premium-blue); font-weight: 700; }
@@ -261,11 +218,12 @@ body.dark-mode .nav-links a {
 
 .gallery-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 1.8rem;
 }
 
 .gallery-card {
+    position: relative;
     overflow: hidden;
     border-radius: 24px;
     transition: all 0.35s ease;
@@ -274,7 +232,7 @@ body.dark-mode .nav-links a {
 
 .gallery-card img {
     width: 100%;
-    height: 220px;
+    height: 250px;
     object-fit: cover;
     display: block;
     transition: transform 0.4s;
@@ -289,7 +247,26 @@ body.dark-mode .nav-links a {
     transform: scale(1.05);
 }
 
-/* Tests grid & Popup on hover */
+.gallery-card .equipment-popup {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    right: 0;
+    background: linear-gradient(135deg, var(--premium-blue), var(--deep-blue));
+    color: white;
+    padding: 1rem;
+    transform: translateY(100%);
+    transition: transform 0.3s ease;
+    font-size: 0.85rem;
+    line-height: 1.5;
+    z-index: 10;
+}
+
+.gallery-card.pop-hover:hover .equipment-popup {
+    transform: translateY(0);
+}
+
+/* Tests Section */
 .tests-pricing-section {
     padding: 2rem 5% 3rem;
     background: #fcfdff;
@@ -306,12 +283,9 @@ body.dark-mode .nav-links a {
     background: var(--white-primary);
     border-radius: 28px;
     padding: 1.4rem 1.5rem;
-    box-shadow: 0 6px 14px rgba(0,0,0,0.03), 0 2px 4px rgba(0,0,0,0.05);
+    box-shadow: 0 6px 14px rgba(0,0,0,0.03);
     border: 1px solid rgba(15,76,129,0.1);
-    transition: all 0.25s;
     position: relative;
-    cursor: default;
-    overflow: visible;
 }
 
 .test-card h4 {
@@ -326,7 +300,6 @@ body.dark-mode .nav-links a {
     margin: 0.5rem 0;
 }
 
-/* Popup content - appears on hover */
 .hover-popup-content {
     position: absolute;
     bottom: 110%;
@@ -337,16 +310,12 @@ body.dark-mode .nav-links a {
     padding: 1rem;
     border-radius: 20px;
     font-size: 0.85rem;
-    line-height: 1.4;
     opacity: 0;
     visibility: hidden;
-    transition: all 0.25s ease-in-out;
+    transition: all 0.25s ease;
     z-index: 100;
-    box-shadow: 0 10px 20px rgba(0,0,0,0.2);
     width: 260px;
     pointer-events: none;
-    backdrop-filter: blur(2px);
-    font-weight: 500;
 }
 
 .test-card:hover .hover-popup-content {
@@ -358,7 +327,6 @@ body.dark-mode .nav-links a {
 .pop-detail {
     display: inline-block;
     margin-top: 6px;
-    font-size: 0.75rem;
     border-top: 1px solid rgba(255,255,255,0.3);
     padding-top: 5px;
 }
@@ -367,33 +335,90 @@ body.dark-mode .nav-links a {
     text-align: center;
     font-size: 0.85rem;
     color: #4b5563;
+    margin-top: 1rem;
 }
 
-/* Registration form */
+/* Split Layout: Form + Map */
 .registration-section {
     background: linear-gradient(145deg, #fff 0%, #f5f9ff 100%);
     padding: 3rem 5%;
 }
 
+.split-container {
+    display: flex;
+    gap: 2rem;
+    flex-wrap: wrap;
+}
+
 .form-container {
-    max-width: 650px;
-    margin: 0 auto;
+    flex: 1;
+    min-width: 300px;
     background: white;
     padding: 2rem;
     border-radius: 36px;
     box-shadow: var(--shadow-premium);
-    transition: all 0.5s;
 }
 
-.slide-up-form {
-    animation: slideUp 0.6s ease-out;
+.map-container {
+    flex: 1;
+    min-width: 300px;
 }
 
-@keyframes slideUp {
-    from { opacity: 0; transform: translateY(30px); }
-    to { opacity: 1; transform: translateY(0); }
+.map-card {
+    background: white;
+    padding: 1.5rem;
+    border-radius: 36px;
+    box-shadow: var(--shadow-premium);
+    height: 100%;
 }
 
+.map-card h4 {
+    color: var(--premium-blue);
+    margin-bottom: 0.5rem;
+}
+
+.map-address {
+    color: #475569;
+    margin-bottom: 1rem;
+    font-size: 0.9rem;
+}
+
+.google-map iframe {
+    width: 100%;
+    height: 350px;
+    border-radius: 20px;
+}
+
+.map-buttons {
+    display: flex;
+    gap: 1rem;
+    margin-top: 1rem;
+    flex-wrap: wrap;
+}
+
+.map-direction-btn, .map-satellite-btn {
+    flex: 1;
+    padding: 10px 16px;
+    border-radius: 40px;
+    text-decoration: none;
+    text-align: center;
+    font-weight: 600;
+    cursor: pointer;
+    border: none;
+    font-size: 0.85rem;
+}
+
+.map-direction-btn {
+    background: var(--premium-blue);
+    color: white;
+}
+
+.map-satellite-btn {
+    background: var(--accent-red);
+    color: white;
+}
+
+/* Form Styles */
 .form-group {
     margin-bottom: 1.2rem;
 }
@@ -411,7 +436,6 @@ input, textarea, select {
     border-radius: 18px;
     border: 1px solid #cfdfed;
     background: white;
-    transition: 0.2s;
     font-size: 1rem;
 }
 
@@ -427,23 +451,18 @@ input:focus, textarea:focus, select:focus {
     border: none;
     padding: 14px 20px;
     font-weight: bold;
-    font-size: 1rem;
     border-radius: 40px;
     cursor: pointer;
     width: 100%;
-    transition: all 0.2s;
-    margin-top: 8px;
 }
 
 .submit-btn:hover {
     background: #a51c34;
-    transform: scale(0.98);
 }
 
 .status-message {
     margin-top: 1rem;
     text-align: center;
-    font-weight: 500;
 }
 
 /* Footer */
@@ -455,17 +474,13 @@ input:focus, textarea:focus, select:focus {
     font-size: 0.85rem;
 }
 
-/* Login page styles */
+/* Login Page */
 .login-body {
     background: linear-gradient(125deg, #eef2ff 0%, #ffffff 100%);
     min-height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
-}
-
-body.dark-mode.login-body {
-    background: linear-gradient(125deg, #0a0a0a 0%, #1a1a1a 100%);
 }
 
 .login-wrapper {
@@ -485,12 +500,7 @@ body.dark-mode.login-body {
     padding: 2.2rem;
     border-radius: 44px;
     box-shadow: 0 25px 40px -12px rgba(0,0,0,0.25);
-    text-align: left;
     border-top: 5px solid var(--accent-red);
-}
-
-.login-header h2 {
-    margin-bottom: 0.3rem;
 }
 
 .full-width {
@@ -505,7 +515,6 @@ body.dark-mode.login-body {
 .back-link a {
     color: var(--premium-blue);
     text-decoration: none;
-    font-weight: 500;
 }
 
 .demo-note {
@@ -515,19 +524,12 @@ body.dark-mode.login-body {
     padding: 6px;
     border-radius: 60px;
     margin-top: 1rem;
-    color: #334155;
 }
 
-body.dark-mode .demo-note {
-    background: #2d2d2d;
-    color: #9ca3af;
-}
-
-/* responsiveness */
 @media (max-width: 768px) {
     .slide-container { flex-direction: column; text-align: center; }
     .premium-header { flex-direction: column; gap: 12px; }
-    .nav-links { margin-top: 10px; flex-wrap: wrap; justify-content: center; }
+    .split-container { flex-direction: column; }
     .test-card .hover-popup-content { width: 200px; left: -10px; }
-    .gallery-grid { grid-template-columns: 1fr; }
+    .gallery-card .equipment-popup { font-size: 0.75rem; padding: 0.75rem; }
 }
