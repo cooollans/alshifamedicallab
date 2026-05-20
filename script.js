@@ -1,28 +1,34 @@
 // script.js
 document.addEventListener('DOMContentLoaded', function() {
-    // Dark Mode Toggle
+    // ========== DARK MODE - FIXED ==========
     const darkModeToggle = document.getElementById('darkModeToggle');
     const body = document.body;
     
-    if (localStorage.getItem('darkMode') === 'enabled') {
+    // Load saved preference
+    const savedMode = localStorage.getItem('darkMode');
+    if (savedMode === 'enabled') {
         body.classList.add('dark-mode');
-        if (darkModeToggle) darkModeToggle.textContent = '☀️ Light';
+        if (darkModeToggle) darkModeToggle.textContent = '☀️ Light Mode';
+    } else {
+        if (darkModeToggle) darkModeToggle.textContent = '🌙 Dark Mode';
     }
     
+    // Toggle dark mode
     if (darkModeToggle) {
         darkModeToggle.addEventListener('click', function() {
             body.classList.toggle('dark-mode');
+            
             if (body.classList.contains('dark-mode')) {
                 localStorage.setItem('darkMode', 'enabled');
-                darkModeToggle.textContent = '☀️ Light';
+                darkModeToggle.textContent = '☀️ Light Mode';
             } else {
                 localStorage.setItem('darkMode', 'disabled');
-                darkModeToggle.textContent = '🌙 Dark';
+                darkModeToggle.textContent = '🌙 Dark Mode';
             }
         });
     }
     
-    // Formspree Form Submission
+    // ========== FORMSPREE FORM SUBMISSION ==========
     const form = document.getElementById('patientForm');
     const statusDiv = document.getElementById('formStatusMsg');
     
@@ -30,10 +36,8 @@ document.addEventListener('DOMContentLoaded', function() {
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            if (statusDiv) {
-                statusDiv.innerHTML = '⏳ Sending registration details...';
-                statusDiv.style.color = '#0f4c81';
-            }
+            statusDiv.innerHTML = '⏳ Sending registration details...';
+            statusDiv.style.color = '#0f4c81';
             
             const formData = new FormData(form);
             
@@ -45,24 +49,36 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 
                 if (response.ok) {
-                    statusDiv.innerHTML = '✅ Registration successful! Patient details sent to anasnadeem5641@gmail.com';
+                    statusDiv.innerHTML = '✅ Registration successful! Details sent to anasnadeem5641@gmail.com';
                     statusDiv.style.color = 'green';
                     form.reset();
-                    setTimeout(() => { statusDiv.innerHTML = ''; }, 5000);
+                    setTimeout(() => {
+                        statusDiv.innerHTML = '';
+                    }, 5000);
                 } else {
                     const errorData = await response.json();
-                    statusDiv.innerHTML = '❌ Error: ' + (errorData.error || 'Submission failed.');
+                    statusDiv.innerHTML = '❌ Error: ' + (errorData.error || 'Submission failed. Please try again.');
                     statusDiv.style.color = '#c41e3a';
                 }
             } catch (error) {
+                console.error('Error:', error);
                 statusDiv.innerHTML = '❌ Network error. Please check your connection.';
                 statusDiv.style.color = '#c41e3a';
             }
         });
     }
     
-    // Open Satellite View Button
-    const openSatelliteBtn = document.getElementById('openSatelliteBtn');
-    if (openSatelliteBtn) {
-        openSatelliteBtn.addEventListener('click', function() {
-            const satelliteUrl = "https://www.google.com/maps/place/Al+Shifa+Hospital+%26+Kidney+Stone+Centre+Vehari/@30.0462643,72.3594653,200m/data=!3m1!1e3!4m6!3m5!1s0x393ceb43f1f01a55:0xdc061f4bd6dff9b9!
+    // ========== EXPLORE TESTS BUTTON ==========
+    const exploreBtn = document.getElementById('exploreTestsBtn');
+    if (exploreBtn) {
+        exploreBtn.addEventListener('click', function() {
+            document.querySelector('.tests-pricing-section').scrollIntoView({ 
+                behavior: 'smooth' 
+            });
+        });
+    }
+    
+    // ========== LOGIN FORM HANDLER ==========
+    const loginForm = document.getElementById('staffLoginForm');
+    if (loginForm) {
+        loginForm
