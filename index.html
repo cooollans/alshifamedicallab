@@ -1,0 +1,151 @@
+<!-- index.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>Al Shifa Medical Lab | Premium Diagnostics</title>
+    <link rel="stylesheet" href="style.css">
+    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body>
+    <header class="premium-header">
+        <div class="logo-area">
+            <h1 class="lab-name">Al Shifa Medical Lab</h1>
+            <p class="tagline">Precision & Care | Since 2010</p>
+        </div>
+        <nav class="nav-links">
+            <a href="index.html" class="active">Home</a>
+            <a href="login.html" class="login-nav-btn">Staff Login</a>
+            <button id="darkModeToggle" class="dark-mode-btn" aria-label="Toggle Dark Mode">🌙 Dark</button>
+        </nav>
+    </header>
+
+    <section class="hero-slide-section">
+        <div class="slide-container animate-slide">
+            <div class="slide-text">
+                <h2>Advanced Diagnostics <span class="accent-red">Trusted by Thousands</span></h2>
+                <p>State-of-the-art laboratory with certified experts. Results you can rely on.</p>
+                <button class="cta-button pulse-effect" id="exploreTestsBtn">Explore Tests ▼</button>
+            </div>
+            <div class="slide-image">
+                <img src="https://images.unsplash.com/photo-1582719478250-c89cae4dc85b?w=600&h=400&fit=crop" alt="Modern Medical Lab Equipment" onerror="this.src='https://placehold.co/600x400/1e3a8a/ffffff?text=Modern+Lab'">
+            </div>
+        </div>
+    </section>
+
+    <section class="gallery-section">
+        <h3 class="section-title">Our <span class="blue-accent">Laboratory</span> Environment</h3>
+        <div class="gallery-grid">
+            <div class="gallery-card pop-hover"><img src="https://images.unsplash.com/photo-1579154204601-01588f351e67?w=400&h=300&fit=crop" alt="Microscope in lab" onerror="this.src='https://placehold.co/400x300/0f4c81/ffffff?text=Microscope'"></div>
+            <div class="gallery-card pop-hover"><img src="https://images.unsplash.com/photo-1586773860418-d37222d8fce3?w=400&h=300&fit=crop" alt="Centrifuge Machines" onerror="this.src='https://placehold.co/400x300/c41e3a/ffffff?text=Centrifuge'"></div>
+            <div class="gallery-card pop-hover"><img src="https://images.unsplash.com/photo-1530026405186-ed1f139313f8?w=400&h=300&fit=crop" alt="Sample Processing" onerror="this.src='https://placehold.co/400x300/1e3a8a/ffffff?text=Sample+Processing'"></div>
+            <div class="gallery-card pop-hover"><img src="https://images.unsplash.com/photo-1615461066842-6116e61058f2?w=400&h=300&fit=crop" alt="Blood Analysis" onerror="this.src='https://placehold.co/400x300/c41e3a/ffffff?text=Blood+Analyzer'"></div>
+        </div>
+    </section>
+
+    <section class="tests-pricing-section">
+        <h3 class="section-title">Basic Medical Tests & <span class="red-accent">PKR Pricing</span></h3>
+        <div class="tests-grid">
+            <div class="test-card" data-testid="cbc">
+                <h4>Complete Blood Count (CBC)</h4>
+                <p class="price-tag">PKR 850</p>
+                <div class="hover-popup-content">
+                    <strong>🔬 CBC Profile</strong><br>
+                    Parameters: RBC, WBC, Hemoglobin, Hematocrit, Platelets, MCV, MCH, MCHC.<br>
+                    <span class="pop-detail">Clinical use: Anemia, infection, blood disorders.<br>⏱️ Report: 6 hours</span>
+                </div>
+            </div>
+            <div class="test-card" data-testid="lipid">
+                <h4>Lipid Profile</h4>
+                <p class="price-tag">PKR 1250</p>
+                <div class="hover-popup-content">
+                    <strong>❤️ Lipid Panel</strong><br>
+                    Total Cholesterol, HDL, LDL, Triglycerides, VLDL.<br>
+                    <span class="pop-detail">Cardiovascular risk assessment. Fasting required (10-12h).</span>
+                </div>
+            </div>
+            <div class="test-card" data-testid="lft">
+                <h4>Liver Function Test (LFT)</h4>
+                <p class="price-tag">PKR 1150</p>
+                <div class="hover-popup-content">
+                    <strong>🧪 Liver Panel</strong><br>
+                    ALT, AST, ALP, Total Bilirubin, Direct Bilirubin, Total Protein, Albumin.<br>
+                    <span class="pop-detail">Monitor liver health & hepatitis.</span>
+                </div>
+            </div>
+            <div class="test-card" data-testid="rft">
+                <h4>Renal Function Test (RFT)</h4>
+                <p class="price-tag">PKR 990</p>
+                <div class="hover-popup-content">
+                    <strong>🩸 Kidney Profile</strong><br>
+                    Urea, Creatinine, Uric Acid, BUN ratio, Electrolytes (Sodium/Potassium).<br>
+                    <span class="pop-detail">Kidney function & hydration status.</span>
+                </div>
+            </div>
+            <div class="test-card" data-testid="thyroid">
+                <h4>Thyroid Profile (T3,T4,TSH)</h4>
+                <p class="price-tag">PKR 1490</p>
+                <div class="hover-popup-content">
+                    <strong>🦋 Thyroid Panel</strong><br>
+                    T3, T4 (Free & Total), TSH Ultrasensitive.<br>
+                    <span class="pop-detail">Thyroid disorders: Hypo/Hyperthyroidism.</span>
+                </div>
+            </div>
+            <div class="test-card" data-testid="glucose">
+                <h4>Blood Glucose (Fasting/Random)</h4>
+                <p class="price-tag">PKR 350</p>
+                <div class="hover-popup-content">
+                    <strong>🍬 Glucose Test</strong><br>
+                    Fasting Blood Sugar (FBS) or Random Sugar. HbA1c available on request.<br>
+                    <span class="pop-detail">Diabetes screening & monitoring.</span>
+                </div>
+            </div>
+        </div>
+        <p class="info-note">✨ Hover over any test card for complete clinical details & parameters.</p>
+    </section>
+
+    <section class="registration-section" id="register">
+        <h3 class="section-title">Patient <span class="blue-accent">Registration</span> for Lab Visit</h3>
+        <div class="form-container slide-up-form">
+            <form id="patientForm">
+                <div class="form-group">
+                    <label>Full Name *</label>
+                    <input type="text" id="patientName" placeholder="e.g., Ahmed Raza" required>
+                </div>
+                <div class="form-group">
+                    <label>Age *</label>
+                    <input type="number" id="patientAge" placeholder="Years" required min="0" max="120">
+                </div>
+                <div class="form-group">
+                    <label>Complete Address *</label>
+                    <textarea id="patientAddress" rows="2" placeholder="Street, City, Postal Code" required></textarea>
+                </div>
+                <div class="form-group">
+                    <label>Phone (optional)</label>
+                    <input type="tel" id="patientPhone" placeholder="+92 XXX XXXXXXX">
+                </div>
+                <div class="form-group">
+                    <label>Preferred Test (optional)</label>
+                    <select id="testSelect">
+                        <option value="CBC">CBC - PKR 850</option>
+                        <option value="Lipid Profile">Lipid Profile - PKR 1250</option>
+                        <option value="Liver Function Test">Liver Function Test - PKR 1150</option>
+                        <option value="Renal Function Test">Renal Function Test - PKR 990</option>
+                        <option value="Thyroid Profile">Thyroid Profile - PKR 1490</option>
+                        <option value="Blood Glucose">Blood Glucose - PKR 350</option>
+                    </select>
+                </div>
+                <button type="submit" class="submit-btn">📧 Register & Send Details</button>
+                <div id="formStatusMsg" class="status-message"></div>
+            </form>
+        </div>
+    </section>
+
+    <footer class="premium-footer">
+        <p>© 2025 Al Shifa Medical Lab — Trusted Diagnostics in Pakistan | 24/7 Customer Support</p>
+        <p>📍 Main Boulevard, Lahore | 📞 042-111-SHIFA</p>
+    </footer>
+    <script src="script.js"></script>
+</body>
+</html>
