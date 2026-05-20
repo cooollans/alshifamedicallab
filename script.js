@@ -1,10 +1,10 @@
 // script.js
 document.addEventListener('DOMContentLoaded', function() {
-    // ========== DARK MODE - FIXED ==========
+    // ========== DARK MODE - FULLY WORKING ==========
     const darkModeToggle = document.getElementById('darkModeToggle');
     const body = document.body;
     
-    // Load saved preference
+    // Load saved preference from localStorage
     const savedMode = localStorage.getItem('darkMode');
     if (savedMode === 'enabled') {
         body.classList.add('dark-mode');
@@ -13,7 +13,7 @@ document.addEventListener('DOMContentLoaded', function() {
         if (darkModeToggle) darkModeToggle.textContent = '🌙 Dark Mode';
     }
     
-    // Toggle dark mode
+    // Toggle dark mode function
     if (darkModeToggle) {
         darkModeToggle.addEventListener('click', function() {
             body.classList.toggle('dark-mode');
@@ -28,6 +28,21 @@ document.addEventListener('DOMContentLoaded', function() {
         });
     }
     
+    // ========== EXPLORE TESTS BUTTON - FULLY WORKING ==========
+    const exploreBtn = document.getElementById('exploreTestsBtn');
+    if (exploreBtn) {
+        exploreBtn.addEventListener('click', function(e) {
+            e.preventDefault();
+            const testsSection = document.querySelector('.tests-pricing-section');
+            if (testsSection) {
+                testsSection.scrollIntoView({ 
+                    behavior: 'smooth',
+                    block: 'start'
+                });
+            }
+        });
+    }
+    
     // ========== FORMSPREE FORM SUBMISSION ==========
     const form = document.getElementById('patientForm');
     const statusDiv = document.getElementById('formStatusMsg');
@@ -36,8 +51,10 @@ document.addEventListener('DOMContentLoaded', function() {
         form.addEventListener('submit', async function(e) {
             e.preventDefault();
             
-            statusDiv.innerHTML = '⏳ Sending registration details...';
-            statusDiv.style.color = '#0f4c81';
+            if (statusDiv) {
+                statusDiv.innerHTML = '⏳ Sending registration details...';
+                statusDiv.style.color = '#0f4c81';
+            }
             
             const formData = new FormData(form);
             
@@ -49,36 +66,15 @@ document.addEventListener('DOMContentLoaded', function() {
                 });
                 
                 if (response.ok) {
-                    statusDiv.innerHTML = '✅ Registration successful! Details sent to anasnadeem5641@gmail.com';
-                    statusDiv.style.color = 'green';
+                    if (statusDiv) {
+                        statusDiv.innerHTML = '✅ Registration successful! Details sent to anasnadeem5641@gmail.com';
+                        statusDiv.style.color = 'green';
+                    }
                     form.reset();
                     setTimeout(() => {
-                        statusDiv.innerHTML = '';
+                        if (statusDiv) statusDiv.innerHTML = '';
                     }, 5000);
                 } else {
                     const errorData = await response.json();
-                    statusDiv.innerHTML = '❌ Error: ' + (errorData.error || 'Submission failed. Please try again.');
-                    statusDiv.style.color = '#c41e3a';
-                }
-            } catch (error) {
-                console.error('Error:', error);
-                statusDiv.innerHTML = '❌ Network error. Please check your connection.';
-                statusDiv.style.color = '#c41e3a';
-            }
-        });
-    }
-    
-    // ========== EXPLORE TESTS BUTTON ==========
-    const exploreBtn = document.getElementById('exploreTestsBtn');
-    if (exploreBtn) {
-        exploreBtn.addEventListener('click', function() {
-            document.querySelector('.tests-pricing-section').scrollIntoView({ 
-                behavior: 'smooth' 
-            });
-        });
-    }
-    
-    // ========== LOGIN FORM HANDLER ==========
-    const loginForm = document.getElementById('staffLoginForm');
-    if (loginForm) {
-        loginForm
+                    if (statusDiv) {
+                        statusDiv.innerHTML = '❌ Error: ' + (errorData.error || 'Submission failed. Please try again.');
